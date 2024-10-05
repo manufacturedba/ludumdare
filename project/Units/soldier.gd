@@ -5,8 +5,8 @@ extends Area2D;
 @onready var collision: CollisionShape2D = $SoldierCollision;
 @onready var timer:Timer = $SoldierAttackTimer;
 
-const DEFAULT_SPEED := Vector2(500,0);
-const ATTACK_INTERVAL = 2;
+const DEFAULT_SPEED := Vector2(100,0);
+const ATTACK_INTERVAL = 1;
 const DAMAGE = 1;
 const MAX_LIFE = 5;
 
@@ -59,7 +59,7 @@ func __updateWidth() -> void:
 	spriteMask.region_rect = Rect2(spriteMask.region_rect.position, Vector2(newWidth, spriteMask.region_rect.size.y));
 	var newCollisionShape = RectangleShape2D.new();
 	newCollisionShape.size = spriteMask.region_rect.size;
-	#collision.shape = newCollisionShape;
+	collision.shape = newCollisionShape;
 
 func _physics_process(delta: float) -> void:
 	position += currentSpeed * delta
