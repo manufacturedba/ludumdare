@@ -1,13 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2fpqgcb0tmjv"]
+[gd_scene load_steps=3 format=3 uid="uid://b2fpqgcb0tmjv"]
 
 [ext_resource type="Script" path="res://Battlefield/Toolbar/UnitSpawnButton/unit_spawn_button.gd" id="1_3w72d"]
+[ext_resource type="Texture2D" uid="uid://b70og1ola2yii" path="res://Battlefield/Toolbar/UnitSpawnButton/Textures/unit-spawn-button.png" id="1_eyw56"]
 
-[node name="UnitSpawnButtonTextured" type="TextureButton"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UnitSpawnButton" type="TextureButton"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+texture_normal = ExtResource("1_eyw56")
+ignore_texture_size = true
+stretch_mode = 0
 script = ExtResource("1_3w72d")
 
 [node name="UnitTypeTexture" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1916.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

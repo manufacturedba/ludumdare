@@ -1,15 +1,14 @@
-extends Node2D
+extends Control
 
+var classes = CONSTANTS.CLASS_ENUM;
 var health := 100;
-var playerUnitTypes := ['a', 'b'];
-var toolbarPreload = preload("res://Battlefield/Toolbar/toolbar.tscn")
+var playerUnitTypes = [classes.SOLDIER, classes.ARCHER];
+
+@onready var toolbar = $Toolbar;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var toolbar = toolbarPreload.instantiate().with(playerUnitTypes);
-	toolbar.health = health;
-	toolbar.global_position = Vector2(0, 100);
-	get_tree().current_scene.add_child(toolbar);
+	toolbar.with(playerUnitTypes, health);
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

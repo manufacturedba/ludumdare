@@ -1,10 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmw1xy5mnuje2"]
+[gd_scene load_steps=4 format=3 uid="uid://bmw1xy5mnuje2"]
 
 [ext_resource type="Texture2D" uid="uid://cfyun4caclnub" path="res://Battlefield/Toolbar/Textures/cat.png" id="1_643hc"]
+[ext_resource type="Script" path="res://Battlefield/Toolbar/gameplaceholder.gd" id="1_qidly"]
+[ext_resource type="PackedScene" uid="uid://c16qyvf1jthk" path="res://Battlefield/Toolbar/toolbar.tscn" id="3_b7oxg"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qidly")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1103.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -214.0
+offset_top = -252.0
+offset_right = 2242.0
+offset_bottom = 1258.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_643hc")
+
+[node name="Toolbar" parent="." instance=ExtResource("3_b7oxg")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 608.0
+offset_right = 1883.0
+offset_bottom = 1041.0
+grow_horizontal = 2
+grow_vertical = 2

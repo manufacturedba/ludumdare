@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://15hb47pibsgu"
-path="res://.godot/imported/toolbarbackground.png-ef719de81001ecfb9ef60ec2f945a68f.ctex"
+uid="uid://myfxt2bb6q1m"
+path="res://.godot/imported/progress-bar-under.png-81918aaf4fb5186642867412da9de9c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battlefield/Toolbar/Textures/toolbarbackground.png"
-dest_files=["res://.godot/imported/toolbarbackground.png-ef719de81001ecfb9ef60ec2f945a68f.ctex"]
+source_file="res://Battlefield/Toolbar/Textures/progress-bar-under.png"
+dest_files=["res://.godot/imported/progress-bar-under.png-81918aaf4fb5186642867412da9de9c5.ctex"]
 
 [params]
 
