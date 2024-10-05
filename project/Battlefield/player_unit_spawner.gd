@@ -20,5 +20,5 @@ func spawnUnit(unitEnumVal: CONSTANTS.CLASS_ENUM):
 	get_tree().current_scene.add_child(unit);
 
 #TODO: Delete this and also the timer
-func _on_player_unit_spawn_timer_timeout() -> void:
-	spawnUnit(CONSTANTS.CLASS_ENUM.SOLDIER);
+#func _on_player_unit_spawn_timer_timeout() -> void:
+	#spawnUnit(CONSTANTS.CLASS_ENUM.SOLDIER);

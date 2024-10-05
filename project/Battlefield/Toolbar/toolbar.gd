@@ -22,6 +22,8 @@ var unitDict = {
 
 @onready var healthbar = $Healthbar;
 @onready var buttonContainer = $MarginContainer/GridContainer/ButtonContainer;
+@onready var playerSpawner = $"../PlayerUnitSpawner";
+
 # @onready var spawner = $Spawner;
 
 
@@ -39,16 +41,12 @@ func _process(delta: float) -> void:
 	pass;
 
 func spawn(unit: int):
-	match unit:
-		classes.SOLDIER:
-			print("spawn soldier")
-		classes.ARCHER:
-			print("spawn archer");
+	playerSpawner.spawnUnit(unit);
 	
 func with(_playerUnitTypes: Array, _health: int):
 	playerUnitTypes = _playerUnitTypes;
 	health = _health;
-	healthbar.health = 100;
+	#healthbar.health = 100;
 	var startingPosition := Vector2(0, 0);
 
 	for index in range(0, playerUnitTypes.size()):
