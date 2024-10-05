@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djjy12c52d7gf"]
+[gd_scene load_steps=14 format=3 uid="uid://djjy12c52d7gf"]
 
 [ext_resource type="Script" path="res://Battlefield/playmat.gd" id="1_q436q"]
 [ext_resource type="Script" path="res://Battlefield/player_base.gd" id="2_1b6mf"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://clqk7gbwtcmbf" path="res://Battlefield/Toolbar/Textures/background.png" id="8_1157n"]
 [ext_resource type="Texture2D" uid="uid://myfxt2bb6q1m" path="res://Battlefield/Toolbar/Textures/progress-bar-under.png" id="9_qsl1r"]
 [ext_resource type="Texture2D" uid="uid://btob66mabiw4" path="res://Battlefield/Toolbar/Textures/progress.png" id="10_2wasf"]
+[ext_resource type="Texture2D" uid="uid://cb8exapdwr7yd" path="res://Assets/Gold Bag.png" id="11_7gvjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rn0mq"]
 size = Vector2(189.875, 504)
@@ -99,7 +100,7 @@ theme_override_constants/margin_bottom = 100
 
 [node name="GridContainer" type="GridContainer" parent="Toolbar/MarginContainer"]
 layout_mode = 2
-columns = 2
+columns = 3
 
 [node name="Healthbar" type="Control" parent="Toolbar/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -126,9 +127,36 @@ value = 100.0
 nine_patch_stretch = true
 texture_progress = ExtResource("10_2wasf")
 
+[node name="ResourceContainer" type="Control" parent="Toolbar/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gold Icon" type="TextureRect" parent="Toolbar/MarginContainer/GridContainer/ResourceContainer"]
+layout_mode = 2
+offset_left = 247.0
+offset_top = 9.0
+offset_right = 313.0
+offset_bottom = 75.0
+texture = ExtResource("11_7gvjy")
+expand_mode = 1
+
+[node name="Gold Label" type="RichTextLabel" parent="Toolbar/MarginContainer/GridContainer/ResourceContainer"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 35.0
+offset_right = 329.0
+offset_bottom = 59.0
+text = "0"
+
 [node name="ButtonContainer" type="GridContainer" parent="Toolbar/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
-columns = 2
+columns = 10
+
+[node name="GoldTimer" type="Timer" parent="Toolbar"]
+wait_time = 4.0
+autostart = true
 
 [connection signal="timeout" from="EnemyUnitSpawner/EnemyUnitSpawnTimer" to="EnemyUnitSpawner" method="_on_enemy_unit_spawn_timer_timeout"]
+[connection signal="timeout" from="Toolbar/GoldTimer" to="Toolbar" method="_on_gold_timer_timeout"]
