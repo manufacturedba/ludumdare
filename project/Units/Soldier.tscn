@@ -49,7 +49,7 @@ shape = SubResource("RectangleShape2D_b07hh")
 
 [node name="SoldierSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wtu0t")
-frame_progress = 0.011172
+frame_progress = 0.712755
 
 [node name="SoldierAttackTimer" type="Timer" parent="."]
 one_shot = true
