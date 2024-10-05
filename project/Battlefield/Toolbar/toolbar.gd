@@ -11,10 +11,12 @@ var unitDict = {
 	classes.SOLDIER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/soldier.png",
 		"cost": 1,
+		"class": classes.SOLDIER
 	},
 	classes.ARCHER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/archer.png",
-		"cost": 2.
+		"cost": 2,
+		"class": classes.ARCHER
 	},
 }
 
@@ -36,15 +38,24 @@ func _process(delta: float) -> void:
 	#healthbar.value += -1;
 	pass;
 
+func spawn(unit: int):
+	match unit:
+		classes.SOLDIER:
+			print("spawn soldier")
+		classes.ARCHER:
+			print("spawn archer");
+	
 func with(_playerUnitTypes: Array, _health: int):
 	playerUnitTypes = _playerUnitTypes;
 	health = _health;
+	healthbar.health = 100;
 	var startingPosition := Vector2(0, 0);
 
 	for index in range(0, playerUnitTypes.size()):
-		var spawnButton = spawnButtonPreload.instantiate()
 		var type = playerUnitTypes[index]; # put real type in
 		var typeConfig = unitDict[type];
+		var spawnButton = spawnButtonPreload.instantiate().with(self, typeConfig)
+
 		# .with(spawner, typeConfig);
 		spawnButton.position = Vector2(buttonWidth * index + buttonOffset, 0);
 		spawnButtons.push_back(spawnButton);
