@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://djjy12c52d7gf"]
+[gd_scene load_steps=8 format=3 uid="uid://djjy12c52d7gf"]
 
 [ext_resource type="Script" path="res://Battlefield/enemy.gd" id="1_7pfb4"]
 [ext_resource type="Texture2D" uid="uid://cjhbxffuovr41" path="res://Battlefield/enemystandin.png" id="2_djkuk"]
 [ext_resource type="Script" path="res://Battlefield/player_unit_spawner.gd" id="3_sijm1"]
 [ext_resource type="Script" path="res://Battlefield/enemy_unit_spawner.gd" id="4_jbaix"]
-[ext_resource type="PackedScene" uid="uid://dc0soohaogl1m" path="res://Units/Soldier.tscn" id="5_s6qxf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e6jx"]
 size = Vector2(189.25, 145.5)
@@ -73,9 +72,6 @@ script = ExtResource("4_jbaix")
 [node name="EnemyUnitSpawnTimer" type="Timer" parent="EnemyUnitSpawner"]
 one_shot = true
 autostart = true
-
-[node name="Soldier" parent="EnemyUnitSpawner" instance=ExtResource("5_s6qxf")]
-position = Vector2(-1046, 33)
 
 [connection signal="area_entered" from="Enemy" to="Enemy" method="_on_area_entered"]
 [connection signal="area_exited" from="Enemy" to="Enemy" method="_on_area_exited"]

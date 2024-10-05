@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dc0soohaogl1m"]
+[gd_scene load_steps=10 format=3 uid="uid://dc0soohaogl1m"]
 
 [ext_resource type="Script" path="res://Units/soldier.gd" id="1_74qcv"]
 [ext_resource type="Texture2D" uid="uid://cleapuqwf8xk6" path="res://Assets/Soldiers-Sheet.png" id="2_cq05t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b07hh"]
+size = Vector2(256, 545)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wvlj"]
 atlas = ExtResource("2_cq05t")
@@ -41,18 +42,27 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_8vvol"]
+
 [node name="Soldier" type="Area2D"]
 script = ExtResource("1_74qcv")
 
 [node name="SoldierCollision" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0.5)
 shape = SubResource("RectangleShape2D_b07hh")
-
-[node name="SoldierSprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_wtu0t")
-frame_progress = 0.712755
 
 [node name="SoldierAttackTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SoldierSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wtu0t")
+frame_progress = 0.045292
+
+[node name="SoldierSpriteMask" type="Sprite2D" parent="."]
+clip_children = 1
+texture = SubResource("CanvasTexture_8vvol")
+region_enabled = true
+region_rect = Rect2(0, 0, 260, 550)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

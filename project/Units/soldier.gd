@@ -1,6 +1,8 @@
 extends Area2D;
 
 @onready var sprite = $SoldierSprite;
+@onready var spriteMask = $SoldierSpriteMask;
+@onready var collision = $SoldierCollision;
 @onready var timer = $SoldierAttackTimer;
 
 const DEFAULT_SPEED := Vector2(50,0);
@@ -30,10 +32,13 @@ func _ready() -> void:
 		normalSpeed = -1*DEFAULT_SPEED;
 		add_to_group("CpuGroup");
 	currentSpeed = normalSpeed;
+	$SoldierSprite.frame = randi_range(0,3);
+	$SoldierSprite.play();
+	set_clip_children_mode(CanvasItem.CLIP_CHILDREN_ONLY);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (timer.is_stopped()):
+	if (timer.is_stopped() && engagedHostiles.size() > 0):
 		attack();
 		timer.start(ATTACK_SPEED);
 		
@@ -46,6 +51,13 @@ func damage(hp: int):
 	life -= hp;
 	if (life <= 0):
 		queue_free();
+		
+func __updateWidth() -> void:
+	var editedRegionRect = sprite.region_rect();
+	editedRegionRect.width = editedRegionRect.width * life / MAX_LIFE;
+	spriteMask.set_region_rect(editedRegionRect);
+	
+	
 
 func _physics_process(delta: float) -> void:
 	position += currentSpeed * delta
@@ -55,6 +67,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return;
 		
 	engagedHostiles.append(area);
+	currentSpeed = Vector2(0, 0);
 	
 func __checkHostile(area: Area2D) -> bool:
 	var iAmPlayer = is_in_group("PlayerGroup");
