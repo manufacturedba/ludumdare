@@ -7,25 +7,31 @@
 
 [node name="toolbar" type="Control"]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jqde0")
+
+[node name="ToolbarContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_jqde0")
+ratio = 0.001
+alignment_horizontal = 0
+alignment_vertical = 0
 
-[node name="ToolbarTexture" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1917.0
-offset_bottom = 1088.0
+[node name="ToolbarTexture" type="TextureRect" parent="ToolbarContainer"]
+layout_mode = 2
 texture = ExtResource("2_gmdv4")
+expand_mode = 2
+stretch_mode = 1
 
-[node name="Healthbar" type="TextureProgressBar" parent="."]
-layout_mode = 0
-offset_left = -5.0
-offset_top = 817.0
-offset_right = 1906.0
-offset_bottom = 1069.0
-nine_patch_stretch = true
+[node name="Healthbar" type="TextureProgressBar" parent="ToolbarContainer"]
+layout_mode = 2
 texture_under = ExtResource("3_pcqxm")
 texture_progress = ExtResource("4_2oo0a")

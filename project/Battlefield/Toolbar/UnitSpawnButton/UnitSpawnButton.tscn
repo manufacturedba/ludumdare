@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://Battlefield/Toolbar/UnitSpawnButton/unit_spawn_button.gd" id="1_3w72d"]
 
-[node name="UnitSpawnButton" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UnitSpawnButtonTextured" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_3w72d")
+
+[node name="UnitTypeTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1916.0
+offset_bottom = 1080.0
