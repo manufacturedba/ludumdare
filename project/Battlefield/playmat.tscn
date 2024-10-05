@@ -1,12 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://djjy12c52d7gf"]
+[gd_scene load_steps=5 format=3 uid="uid://djjy12c52d7gf"]
 
-[ext_resource type="Script" path="res://Battlefield/enemy.gd" id="1_7pfb4"]
-[ext_resource type="Texture2D" uid="uid://cjhbxffuovr41" path="res://Battlefield/enemystandin.png" id="2_djkuk"]
 [ext_resource type="Script" path="res://Battlefield/player_unit_spawner.gd" id="3_sijm1"]
 [ext_resource type="Script" path="res://Battlefield/enemy_unit_spawner.gd" id="4_jbaix"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e6jx"]
-size = Vector2(189.25, 145.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kxt08"]
 size = Vector2(364, 853.5)
@@ -17,17 +12,6 @@ size = Vector2(287.75, 868)
 [node name="Playmat" type="TextureRect"]
 offset_right = 1919.0
 offset_bottom = 1083.0
-
-[node name="Enemy" type="Area2D" parent="."]
-position = Vector2(1538, 138)
-script = ExtResource("1_7pfb4")
-
-[node name="EnemyCollision" type="CollisionShape2D" parent="Enemy"]
-shape = SubResource("RectangleShape2D_1e6jx")
-
-[node name="EnemySprite" type="Sprite2D" parent="Enemy"]
-scale = Vector2(9.15, 6.54)
-texture = ExtResource("2_djkuk")
 
 [node name="Toolbar" type="TextureRect" parent="."]
 layout_mode = 0
@@ -73,7 +57,5 @@ script = ExtResource("4_jbaix")
 one_shot = true
 autostart = true
 
-[connection signal="area_entered" from="Enemy" to="Enemy" method="_on_area_entered"]
-[connection signal="area_exited" from="Enemy" to="Enemy" method="_on_area_exited"]
 [connection signal="timeout" from="PlayerUnitSpawner/PlayerUnitSpawnTimer" to="PlayerUnitSpawner" method="_on_player_unit_spawn_timer_timeout"]
 [connection signal="timeout" from="EnemyUnitSpawner/EnemyUnitSpawnTimer" to="EnemyUnitSpawner" method="_on_enemy_unit_spawn_timer_timeout"]
