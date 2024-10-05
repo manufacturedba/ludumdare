@@ -62,7 +62,6 @@ func with(_playerUnitTypes: Array, _health: int):
 	return self;
 
 func update(health, resource):
-	
 	for button in spawnButtons:
 		var unitType = button.unit.type;
 		var cost = unitDict[unitType].cost;
