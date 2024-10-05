@@ -1,6 +1,7 @@
 extends Area2D
 
-var life := 20
+const MAX_LIFE = 20;
+var life := MAX_LIFE
 
 func damage(hp: int):
 	life -= hp;

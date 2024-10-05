@@ -20,7 +20,7 @@ var unitDict = {
 	},
 }
 
-@onready var healthbar = $Healthbar;
+@onready var healthbar = $MarginContainer/GridContainer/Healthbar/HealthbarProgress;
 @onready var buttonContainer = $MarginContainer/GridContainer/ButtonContainer;
 @onready var playerSpawner = $"../PlayerUnitSpawner";
 
@@ -37,7 +37,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#healthbar.value += -1;
 	pass;
 
 func spawn(unit: int):
@@ -60,6 +59,9 @@ func with(_playerUnitTypes: Array, _health: int):
 		buttonContainer.add_child(spawnButton);
 		
 	return self;
+	
+func updateLifePercent(percent: int) -> void:
+	healthbar.value = percent;
 
 func update(health, resource):
 	for button in spawnButtons:
