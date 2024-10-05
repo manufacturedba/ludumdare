@@ -64,3 +64,4 @@ texture_progress = ExtResource("4_2oo0a")
 [node name="ButtonContainer" type="GridContainer" parent="MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
+columns = 2
