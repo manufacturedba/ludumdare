@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://djjy12c52d7gf"]
+
+[ext_resource type="Script" path="res://Battlefield/enemy.gd" id="1_7pfb4"]
+[ext_resource type="Texture2D" uid="uid://cjhbxffuovr41" path="res://Battlefield/enemystandin.png" id="2_djkuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e6jx"]
+size = Vector2(189.25, 145.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxt08"]
+size = Vector2(364, 853.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn0mq"]
+size = Vector2(287.75, 868)
+
+[node name="Playmat" type="TextureRect"]
+offset_right = 1919.0
+offset_bottom = 1083.0
+
+[node name="Enemy" type="Area2D" parent="."]
+position = Vector2(1538, 138)
+script = ExtResource("1_7pfb4")
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_1e6jx")
+
+[node name="EnemySprite" type="Sprite2D" parent="Enemy"]
+scale = Vector2(9.15, 6.54)
+texture = ExtResource("2_djkuk")
+
+[node name="Toolbar" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 830.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="EnemyBase2" type="Area2D" parent="."]
+position = Vector2(1920, 0)
+
+[node name="EnemyBase" type="TextureRect" parent="EnemyBase2"]
+offset_left = -336.0
+offset_bottom = 830.0
+
+[node name="EnemyBaseCollision" type="CollisionShape2D" parent="EnemyBase2"]
+position = Vector2(-182, 415.25)
+shape = SubResource("RectangleShape2D_kxt08")
+
+[node name="PlayerBase2" type="Area2D" parent="."]
+
+[node name="PlayerBaseCollision" type="CollisionShape2D" parent="PlayerBase2"]
+shape = SubResource("RectangleShape2D_rn0mq")
+
+[node name="PlayerBaseTexture" type="TextureRect" parent="PlayerBase2"]
+offset_left = 213.0
+offset_top = 59.0
+offset_right = 549.0
+offset_bottom = 889.0
+
+[connection signal="area_entered" from="Enemy" to="Enemy" method="_on_area_entered"]
+[connection signal="area_exited" from="Enemy" to="Enemy" method="_on_area_exited"]
