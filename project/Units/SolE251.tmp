@@ -61,7 +61,7 @@ region_rect = Rect2(0, 0, 260, 550)
 
 [node name="SoldierSprite" type="AnimatedSprite2D" parent="SoldierSpriteMask"]
 sprite_frames = SubResource("SpriteFrames_wtu0t")
-frame_progress = 0.417011
+frame_progress = 0.620821
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

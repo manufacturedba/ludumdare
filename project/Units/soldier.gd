@@ -1,10 +1,12 @@
 extends Area2D;
 
-@onready var sprite = $SoldierSprite;
-@onready var timer = $SoldierAttackTimer;
+@onready var sprite: AnimatedSprite2D = $SoldierSpriteMask/SoldierSprite;
+@onready var spriteMask:Sprite2D = $SoldierSpriteMask;
+@onready var collision: CollisionShape2D = $SoldierCollision;
+@onready var timer:Timer = $SoldierAttackTimer;
 
-const DEFAULT_SPEED := Vector2(50,0);
-const ATTACK_SPEED = 1;
+const DEFAULT_SPEED := Vector2(100,0);
+const ATTACK_INTERVAL = 1;
 const DAMAGE = 1;
 const MAX_LIFE = 5;
 
@@ -30,12 +32,15 @@ func _ready() -> void:
 		normalSpeed = -1*DEFAULT_SPEED;
 		add_to_group("CpuGroup");
 	currentSpeed = normalSpeed;
+	sprite.frame = randi_range(0,3);
+	sprite.play();
+	set_clip_children_mode(CanvasItem.CLIP_CHILDREN_ONLY);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (timer.is_stopped()):
+	if (timer.is_stopped() && engagedHostiles.size() > 0):
 		attack();
-		timer.start(ATTACK_SPEED);
+		timer.start(ATTACK_INTERVAL);
 		
 func attack() -> void:
 	var engagedHostileSize = engagedHostiles.size();
@@ -44,8 +49,17 @@ func attack() -> void:
 		
 func damage(hp: int):
 	life -= hp;
+	__updateWidth();
 	if (life <= 0):
 		queue_free();
+		
+func __updateWidth() -> void:
+	var totalWidth = sprite.sprite_frames.get_frame_texture('default', 0).get_width();
+	var newWidth = totalWidth * life / MAX_LIFE;
+	spriteMask.region_rect = Rect2(spriteMask.region_rect.position, Vector2(newWidth, spriteMask.region_rect.size.y));
+	var newCollisionShape = RectangleShape2D.new();
+	newCollisionShape.size = spriteMask.region_rect.size;
+	collision.shape = newCollisionShape;
 
 func _physics_process(delta: float) -> void:
 	position += currentSpeed * delta
@@ -55,6 +69,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return;
 		
 	engagedHostiles.append(area);
+	currentSpeed = Vector2(0, 0);
 	
 func __checkHostile(area: Area2D) -> bool:
 	var iAmPlayer = is_in_group("PlayerGroup");
