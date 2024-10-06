@@ -1,18 +1,11 @@
 extends TextureRect
 
-#@onready var playerSpawner = $PlayerUnitSpawner;
-#@onready var toolbar = $Toolbar;
-# Called when the node enters the scene tree for the first time.
-var health := 100;
-var classes = CONSTANTS.CLASS_ENUM;
-var playerUnitTypes = [classes.SOLDIER, classes.ARCHER];
-
 @onready var toolbar = $Toolbar;
+@onready var enemyUnitSpawner = $EnemyUnitSpawner;
 
-func _ready() -> void:
-	toolbar.with(playerUnitTypes, health);
+func with(playerUnitTypes: Array[CONSTANTS.CLASS_ENUM], enemyPattern: Array[CONSTANTS.CLASS_ENUM]):
+	toolbar.with(playerUnitTypes);
+	enemyUnitSpawner.with(enemyPattern);
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_enemy_base_destruction_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://Menus/Victory.tscn");

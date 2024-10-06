@@ -6,6 +6,8 @@ var playerUnitTypes;
 var gold = 2;
 var income = 1;
 
+const MAX_GOLD = 99;
+
 var unitDict = {
 	CONSTANTS.CLASS_ENUM.SOLDIER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/soldier.png",
@@ -47,7 +49,7 @@ func spawn(unit: CONSTANTS.CLASS_ENUM):
 	playerSpawner.spawnUnit(unit);
 	updateGold();
 	
-func with(_playerUnitTypes: Array, _health: int):
+func with(_playerUnitTypes: Array[CONSTANTS.CLASS_ENUM]):
 	playerUnitTypes = _playerUnitTypes;
 	var startingPosition := Vector2(0, 0);
 
@@ -79,5 +81,7 @@ func updateGold():
 
 
 func _on_gold_timer_timeout() -> void:
+	if (gold >= MAX_GOLD):
+		return;
 	gold += income;
 	updateGold();

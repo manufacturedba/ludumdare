@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d04dlsoy2tx6e"]
+
+[ext_resource type="Script" path="res://Levels/level_1.gd" id="1_vddeb"]
+[ext_resource type="PackedScene" uid="uid://djjy12c52d7gf" path="res://Battlefield/playmat.tscn" id="2_otk3t"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_vddeb")
+
+[node name="Playmat" parent="." instance=ExtResource("2_otk3t")]

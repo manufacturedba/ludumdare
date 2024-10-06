@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://b100m8garqq62"]
+
+[ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_fd8qa"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1914.0
+offset_bottom = 1081.0
+script = ExtResource("1_fd8qa")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1082.0
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 300
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Level1" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="Level4" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 4"
+
+[node name="Level5" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 5"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Level4" to="." method="_on_level_4_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Level5" to="." method="_on_level_5_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

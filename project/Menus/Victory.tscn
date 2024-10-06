@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm0g4k6pdwsv1"]
+
+[ext_resource type="Script" path="res://Menus/victory.gd" id="1_bui1w"]
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bui1w")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 607.0
+offset_top = 160.0
+offset_right = 1393.0
+offset_bottom = 314.0
+theme_override_font_sizes/normal_font_size = 100
+text = "Level Complete!"
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 346.0
+offset_right = 1300.0
+offset_bottom = 508.0
+theme_override_font_sizes/font_size = 50
+text = "Back to main menu"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_button_pressed"]

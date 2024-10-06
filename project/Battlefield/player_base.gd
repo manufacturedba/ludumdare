@@ -11,4 +11,3 @@ func damage(hp: int):
 	if (life <= 0):
 		print_debug("Player base destroyed");
 		queue_free();
-	
