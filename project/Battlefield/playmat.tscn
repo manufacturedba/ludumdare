@@ -152,6 +152,7 @@ text = "0"
 [node name="ButtonContainer" type="GridContainer" parent="Toolbar/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
+theme_override_constants/h_separation = 60
 columns = 10
 
 [node name="GoldTimer" type="Timer" parent="Toolbar"]
