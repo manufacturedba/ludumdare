@@ -7,8 +7,8 @@
 
 [node name="UnitSpawnButton" type="TextureButton"]
 custom_minimum_size = Vector2(100, 100)
-offset_right = 100.0
-offset_bottom = 100.0
+offset_right = 196.0
+offset_bottom = 196.0
 texture_normal = ExtResource("1_eyw56")
 texture_pressed = ExtResource("2_t8sja")
 texture_disabled = ExtResource("3_mfccs")
