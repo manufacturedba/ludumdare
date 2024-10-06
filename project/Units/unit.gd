@@ -7,9 +7,11 @@ class_name Unit
 @onready var collision: CollisionShape2D = $UnitCollision;
 @onready var timer:Timer = $UnitAttackTimer;
 
+const ATTACK_INTERVAL = 1;
+
 var defaultSpeed: int = CONSTANTS.SOLDIER_SPEED;
+var attackDamage = 1;
 var attackInterval = 1;
-const DAMAGE = 1;
 
 var life = 1;
 var maxLife = 1;
@@ -19,10 +21,19 @@ var currentSpeed: Vector2;
 var isPlayer: bool
 var engagedHostiles: Array[Area2D] = [];
 
-func _with(_isPlayer: bool, _maxLife: int):
-	maxLife = _maxLife;
-	life = maxLife;
+func _with(
+	_isPlayer: bool, 
+	_maxLife: int = CONSTANTS.SOLDIER_LIFE, 
+	_attackDamage: int = CONSTANTS.SOLDIER_DAMAGE,
+	_defaultSpeed: int = CONSTANTS.SOLDIER_SPEED
+):
 	isPlayer = _isPlayer;
+	maxLife = _maxLife;
+	attackDamage = _attackDamage;
+	defaultSpeed = _defaultSpeed;
+	
+	life = maxLife;
+	
 	return self;
 
 # Called when the node enters the scene tree for the first time.
@@ -50,7 +61,7 @@ func _process(delta: float) -> void:
 func attack() -> void:
 	var engagedHostileSize = engagedHostiles.size();
 	if (engagedHostileSize > 0):
-		engagedHostiles[engagedHostileSize - 1].damage(DAMAGE)
+		engagedHostiles[engagedHostileSize - 1].damage(attackDamage)
 		
 func damage(hp: int):
 	life -= hp;

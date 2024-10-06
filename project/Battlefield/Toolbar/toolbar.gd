@@ -11,20 +11,30 @@ const MAX_GOLD = 99;
 var unitDict = {
 	CONSTANTS.CLASS_ENUM.SOLDIER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/soldier.png",
-		"cost": 1,
+		"cost": CONSTANTS.SOLDIER_COST,
 		"class": CONSTANTS.CLASS_ENUM.SOLDIER
 	},
 	CONSTANTS.CLASS_ENUM.ARCHER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/archer.png",
-		"cost": 2,
+		"cost": CONSTANTS.ARCHER_COST,
 		"class": CONSTANTS.CLASS_ENUM.ARCHER
 	},
 	CONSTANTS.CLASS_ENUM.CATAPULT: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/archer.png",
-		"cost": 5,
+		"cost": CONSTANTS.CATAPULT_COST,
 		"class": CONSTANTS.CLASS_ENUM.CATAPULT
 	},
-}
+	CONSTANTS.CLASS_ENUM.BRUTE: {
+		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/soldier.png",
+		"cost": CONSTANTS.BRUTE_COST,
+		"class": CONSTANTS.CLASS_ENUM.BRUTE
+	},
+	CONSTANTS.CLASS_ENUM.SCOUT: {
+		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/soldier.png",
+		"cost": CONSTANTS.SCOUT_COST,
+		"class": CONSTANTS.CLASS_ENUM.SCOUT
+	}
+};
 
 @onready var healthbar = $MarginContainer/GridContainer/Healthbar/HealthbarProgress;
 @onready var buttonContainer = $MarginContainer/GridContainer/ButtonContainer;
