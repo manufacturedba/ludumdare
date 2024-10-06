@@ -6,7 +6,7 @@ extends Archer
 
 func with(_isPlayer):
 	defaultSpeed = CONSTANTS.CATAPULT_SPEED;
-	return _with(_isPlayer, CONSTANTS.CATAPULT_LIFE);
+	return _with(_isPlayer, CONSTANTS.CATAPULT_LIFE, CONSTANTS.CATAPULT_DAMAGE, CONSTANTS.CATAPULT_SPEED);
 
 func update_sprite() -> void:
 	sprite.sprite_frames = catapultSprite.sprite_frames;
@@ -25,25 +25,26 @@ func _ready() -> void:
 	
 # engage hostiles in the firing zone after figuring out who is closest
 func attack() -> void:
-	var engagedHostileSize = engagedHostiles.size();
-	if (engagedHostileSize > 0):
-		var nearestHostile;
-		var smallest;
-		for hostile in engagedHostiles:
-			var difference = abs(global_position.x - hostile.global_position.x);
-			if !smallest or difference > smallest:
-				nearestHostile = hostile;
-				smallest = difference;
-		var ballistic = projectile.instantiate().with(isPlayer);
-		# Predetermined landing zone
-		ballistic.destination = nearestHostile.global_position.x;
-		ballistic.global_position.x = global_position.x;
-		ballistic.global_position.y = global_position.y;
-		# Ballistic will not die with catapult
-		root_node.add_child(ballistic);
+	super();
+
+func create_arrow() -> void:
+	var nearestHostile;
+	var smallest;
+	for hostile in rangedHostiles:
+		var difference = abs(global_position.x - hostile.global_position.x);
+		if !smallest or difference > smallest:
+			nearestHostile = hostile;
+			smallest = difference;
+	var ballistic = projectile.instantiate().with(isPlayer);
+	# Predetermined landing zone
+	ballistic.destination = nearestHostile.global_position.x;
+	ballistic.global_position.x = global_position.x;
+	ballistic.global_position.y = global_position.y;
+	# Ballistic will not die with catapult
+	root_node.add_child(ballistic);
 		
 func _on_firing_range_area_entered(area: Area2D) -> void:
-	_on_area_entered(area);
+	super(area);
 
 func _on_firing_range_area_exited(area: Area2D) -> void:
-	_on_area_exited(area);
+	super(area);
