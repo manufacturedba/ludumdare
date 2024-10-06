@@ -4,12 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bojiu6wbo1ybw" path="res://Units/Projectile/Textures/catapult-ballistic.png" id="2_i44xe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_226rq"]
-size = Vector2(129, 107.5)
+size = Vector2(409.5, 296.75)
 
 [node name="CatapultBallistic" type="Area2D"]
 script = ExtResource("1_ekw3s")
 
 [node name="CatapultBallisticCollision" type="CollisionShape2D" parent="."]
+position = Vector2(41, 43)
 shape = SubResource("RectangleShape2D_226rq")
 
 [node name="CatapultBallisticTexture" type="TextureRect" parent="CatapultBallisticCollision"]
@@ -25,3 +26,4 @@ stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

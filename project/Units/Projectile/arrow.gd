@@ -8,6 +8,7 @@ var damage = CONSTANTS.ARROW_DAMAGE;
 var isPlayer : bool;
 var direction = 1;
 var normalSpeed = Vector2(0, 0);
+var destination: int;
 
 func with(_isPlayer: bool):
 	isPlayer = _isPlayer;
@@ -30,10 +31,18 @@ func _ready() -> void:
 	if (isPlayer):
 		add_to_group("PlayerGroup");
 	else:
+		rotation = deg_to_rad(180);
+		direction = -1;
 		add_to_group("CpuGroup");
 
 func _physics_process(delta: float) -> void:
 	position += Vector2(direction * speed, 0) * delta
+	
+	# Arrow will not live past where it was aimed at
+	# TODO: Handle both player and enemy directions
+	var difference = abs(global_position.x - destination);
+	if (difference <= 2):
+		queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
 	if (!__checkHostile(area)):
