@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkp8shqfguhbh"]
+
+[ext_resource type="PackedScene" uid="uid://dc0soohaogl1m" path="res://Units/Unit.tscn" id="1_71uki"]
+[ext_resource type="Script" path="res://Units/catapult.gd" id="2_upnbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u0nm"]
+size = Vector2(1378, 60)
+
+[node name="Catapult" instance=ExtResource("1_71uki")]
+script = ExtResource("2_upnbx")
+
+[node name="FiringRange" type="Area2D" parent="." index="3"]
+
+[node name="FiringRangeCollision" type="CollisionShape2D" parent="FiringRange" index="0"]
+position = Vector2(770, 7)
+shape = SubResource("RectangleShape2D_4u0nm")
+
+[connection signal="area_entered" from="FiringRange" to="." method="_on_firing_range_area_entered"]
+[connection signal="area_exited" from="FiringRange" to="." method="_on_firing_range_area_exited"]

@@ -3,7 +3,7 @@ extends Control
 var spawnButtonPreload := preload("res://Battlefield/Toolbar/UnitSpawnButton/UnitSpawnButton.tscn");
 var spawnButtons = [];
 var playerUnitTypes;
-var gold = 2;
+var gold = 10;
 var income = 1;
 
 const MAX_GOLD = 99;
@@ -18,6 +18,11 @@ var unitDict = {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/archer.png",
 		"cost": 2,
 		"class": CONSTANTS.CLASS_ENUM.ARCHER
+	},
+	CONSTANTS.CLASS_ENUM.CATAPULT: {
+		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/archer.png",
+		"cost": 5,
+		"class": CONSTANTS.CLASS_ENUM.CATAPULT
 	},
 }
 

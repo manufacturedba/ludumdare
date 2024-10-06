@@ -2,19 +2,13 @@ extends Node2D
 
 @onready var timer:Timer = $EnemyUnitSpawnTimer;
 
-const plSoldier = preload("res://Units/Soldier.tscn");
-const plArcher = preload("res://Units/Archer.tscn");
-
-const unitEnumPlMap = {
-	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier,
-	CONSTANTS.CLASS_ENUM.ARCHER: plArcher
-}
-
 var pattern: Array[CONSTANTS.CLASS_ENUM] = [CONSTANTS.CLASS_ENUM.SOLDIER];
 var patternIdx := 0;
+var unitEnumPlMap;
 
-func with(_pattern: Array[CONSTANTS.CLASS_ENUM]):
+func with(_pattern: Array[CONSTANTS.CLASS_ENUM], _unitEnumPlMap):
 	pattern = _pattern;
+	unitEnumPlMap = _unitEnumPlMap;
 	return self;
 
 # Called when the node enters the scene tree for the first time.
@@ -26,7 +20,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_enemy_unit_spawn_timer_timeout() -> void:
-	patternIdx = patternIdx+1 % pattern.size();
+	patternIdx = (patternIdx+1) % pattern.size();
 	var unitEnumVal = pattern[patternIdx];
 	spawnUnit(unitEnumVal);
 	timer.start(4);

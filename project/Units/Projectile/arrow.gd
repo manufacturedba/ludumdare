@@ -1,6 +1,10 @@
 extends Node2D
 
+class_name Arrow
+
 var speed = CONSTANTS.ARROW_SPEED;
+var damage = CONSTANTS.ARROW_DAMAGE;
+
 var isPlayer : bool;
 var direction = 1;
 var normalSpeed = Vector2(0, 0);
@@ -27,15 +31,14 @@ func _ready() -> void:
 		add_to_group("PlayerGroup");
 	else:
 		add_to_group("CpuGroup");
-	normalSpeed = Vector2(direction * speed, 0);
 
 func _physics_process(delta: float) -> void:
-	position += normalSpeed * delta
+	position += Vector2(direction * speed, 0) * delta
 
 func _on_area_entered(area: Area2D) -> void:
 	if (!__checkHostile(area)):
 		return;
 	
 	if (area.damage):
-		area.damage(1);
+		area.damage(damage);
 	queue_free();
