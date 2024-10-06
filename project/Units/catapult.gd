@@ -2,9 +2,15 @@ extends Archer
 
 @onready var plCatapultBallistic = preload("res://Units/Projectile/CatapultBallistic.tscn");
 
+@onready var catapultSprite = $CatapultSprite;
+
 func with(_isPlayer):
 	defaultSpeed = CONSTANTS.CATAPULT_SPEED;
 	return _with(_isPlayer, CONSTANTS.CATAPULT_LIFE);
+
+func update_sprite() -> void:
+	sprite.sprite_frames = catapultSprite.sprite_frames;
+	sprite.play();
 	
 func _ready() -> void:
 	super();
@@ -16,7 +22,7 @@ func _ready() -> void:
 	firingRangeCollision.shape = newCollisionShape;
 	firingRangeCollision.position.x = range;
 	firingRange.position = Vector2(firingRange.position.x + CONSTANTS.CATAPULT_MINIMUM_RANGE, firingRange.position.y);
-
+	
 # engage hostiles in the firing zone after figuring out who is closest
 func attack() -> void:
 	var engagedHostileSize = engagedHostiles.size();

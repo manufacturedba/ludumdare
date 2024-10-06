@@ -9,6 +9,8 @@ var range = 0;
 @onready var firingRangeCollision = $FiringRange/FiringRangeCollision;
 @onready var firingRange = $FiringRange;
 
+@onready var archerSprite = $ArcherSprite;
+
 var projectile;
 @onready var root_node = get_node("/root");
 
@@ -16,6 +18,10 @@ func with(_isPlayer):
 	defaultSpeed = CONSTANTS.ARCHER_SPEED;
 	return _with(_isPlayer, CONSTANTS.ARCHER_LIFE);
 
+func update_sprite() -> void:
+	sprite.sprite_frames = archerSprite.sprite_frames;
+	sprite.play();
+	
 func _ready() -> void:
 	super();
 	attackInterval = CONSTANTS.ARCHER_FIRING_SPEED;
@@ -25,7 +31,8 @@ func _ready() -> void:
 	newCollisionShape.size = Vector2(range, 1);
 	firingRangeCollision.shape = newCollisionShape;
 	firingRangeCollision.position.x = range;
-
+	update_sprite();
+	
 func get_nearest_hostile() -> Area2D:
 	var nearestHostile;
 	var smallest;

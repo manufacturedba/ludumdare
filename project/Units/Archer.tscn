@@ -1,10 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmxfnvkdhtaiy"]
+[gd_scene load_steps=11 format=3 uid="uid://dmxfnvkdhtaiy"]
 
 [ext_resource type="PackedScene" uid="uid://dc0soohaogl1m" path="res://Units/Unit.tscn" id="1_d2mv1"]
 [ext_resource type="Script" path="res://Units/archer.gd" id="1_vnvi1"]
+[ext_resource type="Texture2D" uid="uid://xk07hs7mxqg6" path="res://Assets/archers-final-sheet.png" id="3_3rs8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4u0nm"]
 size = Vector2(1378, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7h66"]
+atlas = ExtResource("3_3rs8b")
+region = Rect2(0, 0, 200, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2la2"]
+atlas = ExtResource("3_3rs8b")
+region = Rect2(200, 0, 200, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q327p"]
+atlas = ExtResource("3_3rs8b")
+region = Rect2(400, 0, 200, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kedon"]
+atlas = ExtResource("3_3rs8b")
+region = Rect2(600, 0, 200, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h4y8"]
+atlas = ExtResource("3_3rs8b")
+region = Rect2(800, 0, 200, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_el7mq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7h66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2la2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q327p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kedon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2h4y8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Archer" instance=ExtResource("1_d2mv1")]
 script = ExtResource("1_vnvi1")
@@ -14,6 +58,11 @@ script = ExtResource("1_vnvi1")
 [node name="FiringRangeCollision" type="CollisionShape2D" parent="FiringRange" index="0"]
 position = Vector2(770, 7)
 shape = SubResource("RectangleShape2D_4u0nm")
+
+[node name="ArcherSprite" type="AnimatedSprite2D" parent="." index="4"]
+position = Vector2(-366, -869)
+scale = Vector2(0.56224, 0.56224)
+sprite_frames = SubResource("SpriteFrames_el7mq")
 
 [connection signal="area_entered" from="FiringRange" to="." method="_on_firing_range_area_entered"]
 [connection signal="area_exited" from="FiringRange" to="." method="_on_firing_range_area_exited"]

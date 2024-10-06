@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 	# Arrow will not live past where it was aimed at
 	# TODO: Handle both player and enemy directions
 	var difference = abs(global_position.x - destination);
-	print_debug(difference);
 	if (difference <= 2):
 		queue_free()
 
