@@ -10,16 +10,18 @@ class_name Unit
 const DEFAULT_SPEED := Vector2(100,0);
 const ATTACK_INTERVAL = 1;
 const DAMAGE = 1;
-const MAX_LIFE = 5;
 
-var life = MAX_LIFE;
+var life = 1;
+var maxLife = 1;
 var color: Color;
 var normalSpeed: Vector2;
 var currentSpeed: Vector2;
 var isPlayer: bool
 var engagedHostiles: Array[Area2D] = [];
 
-func with(_isPlayer: bool):
+func _with(_isPlayer: bool, _maxLife: int):
+	maxLife = _maxLife;
+	life = maxLife;
 	isPlayer = _isPlayer;
 	return self;
 
@@ -57,7 +59,7 @@ func damage(hp: int):
 		
 func __updateWidth() -> void:
 	var totalWidth = sprite.sprite_frames.get_frame_texture('default', 0).get_width();
-	var newWidth = totalWidth * life / MAX_LIFE;
+	var newWidth = totalWidth * life / maxLife;
 	spriteMask.region_rect = Rect2(spriteMask.region_rect.position, Vector2(newWidth, spriteMask.region_rect.size.y));
 	var newCollisionShape = RectangleShape2D.new();
 	newCollisionShape.size = spriteMask.region_rect.size;

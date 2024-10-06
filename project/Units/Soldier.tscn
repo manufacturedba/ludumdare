@@ -1,5 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2hhpupmjvjm7"]
+[gd_scene load_steps=3 format=3 uid="uid://c2hhpupmjvjm7"]
 
 [ext_resource type="PackedScene" uid="uid://dc0soohaogl1m" path="res://Units/Unit.tscn" id="1_7uibd"]
+[ext_resource type="Script" path="res://Units/soldier.gd" id="1_74qcv"]
 
 [node name="Soldier" instance=ExtResource("1_7uibd")]
+script = ExtResource("1_74qcv")
