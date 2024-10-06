@@ -11,6 +11,7 @@ const ATTACK_INTERVAL = 1;
 
 var defaultSpeed: int = CONSTANTS.SOLDIER_SPEED;
 var attackDamage = 1;
+var attackInterval = 1;
 
 var life = 1;
 var maxLife = 1;
@@ -44,6 +45,7 @@ func _ready() -> void:
 	else:
 		sprite.modulate = Color.RED;
 		normalSpeed = Vector2(-1*defaultSpeed, 0);
+		rotation = deg_to_rad(180);
 		add_to_group("CpuGroup");
 	currentSpeed = normalSpeed;
 	sprite.frame = randi_range(0,3);
@@ -54,7 +56,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if (timer.is_stopped() && engagedHostiles.size() > 0):
 		attack();
-		timer.start(ATTACK_INTERVAL);
+		timer.start(attackInterval);
 		
 func attack() -> void:
 	var engagedHostileSize = engagedHostiles.size();
@@ -86,6 +88,9 @@ func _on_area_entered(area: Area2D) -> void:
 	currentSpeed = Vector2(0, 0);
 	
 func __checkHostile(area: Area2D) -> bool:
+	if (area.is_in_group("ProjectileGroup")):
+		return false;
+		
 	var iAmPlayer = is_in_group("PlayerGroup");
 	if (iAmPlayer):
 		return area.is_in_group("CpuGroup");
