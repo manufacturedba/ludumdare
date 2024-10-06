@@ -41,7 +41,7 @@ func create_arrow() -> void:
 	ballistic.global_position.x = global_position.x;
 	ballistic.global_position.y = global_position.y;
 	# Ballistic will not die with catapult
-	root_node.add_child(ballistic);
+	parentNode.add_child(ballistic);
 		
 func _on_firing_range_area_entered(area: Area2D) -> void:
 	super(area);

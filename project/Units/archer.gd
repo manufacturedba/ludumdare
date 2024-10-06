@@ -12,7 +12,7 @@ var range = 0;
 @onready var archerSprite = $ArcherSprite;
 
 var projectile;
-@onready var root_node = get_node("/root");
+@onready var parentNode = get_parent();
 
 var rangedHostiles: Array[Area2D] = [];
 
@@ -32,7 +32,7 @@ func update_sprite() -> void:
 	sprite.sprite_frames = archerSprite.sprite_frames;
 	sprite.play();
 	
-func _ready() -> void:
+func _ready() -> void:	
 	super();
 	attackInterval = CONSTANTS.ARCHER_FIRING_SPEED;
 	projectile = plArrow;
@@ -69,7 +69,7 @@ func create_arrow() -> void:
 	arrow.global_position.y = global_position.y;
 	arrow.destination = get_nearest_hostile().global_position.x;
 	# Ballistic will not die with catapult
-	root_node.add_child(arrow);
+	parentNode.add_child(arrow);
 
 func _on_area_entered(area: Area2D) -> void:
 	if (!__checkHostile(area)):
