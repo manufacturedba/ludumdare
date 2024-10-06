@@ -1,64 +1,162 @@
-[gd_scene load_steps=7 format=3 uid="uid://djjy12c52d7gf"]
+[gd_scene load_steps=14 format=3 uid="uid://djjy12c52d7gf"]
 
 [ext_resource type="Script" path="res://Battlefield/playmat.gd" id="1_q436q"]
+[ext_resource type="Script" path="res://Battlefield/player_base.gd" id="2_1b6mf"]
+[ext_resource type="Texture2D" uid="uid://bcey277d67t6v" path="res://Assets/BaseWall.png" id="2_so5vb"]
 [ext_resource type="Script" path="res://Battlefield/player_unit_spawner.gd" id="3_sijm1"]
-[ext_resource type="PackedScene" uid="uid://c16qyvf1jthk" path="res://Battlefield/Toolbar/toolbar.tscn" id="4_bxqui"]
 [ext_resource type="Script" path="res://Battlefield/enemy_unit_spawner.gd" id="4_jbaix"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxt08"]
-size = Vector2(364, 853.5)
+[ext_resource type="Script" path="res://Battlefield/enemy_base.gd" id="4_w216x"]
+[ext_resource type="Script" path="res://Battlefield/Toolbar/toolbar.gd" id="7_xm6jr"]
+[ext_resource type="Texture2D" uid="uid://clqk7gbwtcmbf" path="res://Battlefield/Toolbar/Textures/background.png" id="8_1157n"]
+[ext_resource type="Texture2D" uid="uid://myfxt2bb6q1m" path="res://Battlefield/Toolbar/Textures/progress-bar-under.png" id="9_qsl1r"]
+[ext_resource type="Texture2D" uid="uid://btob66mabiw4" path="res://Battlefield/Toolbar/Textures/progress.png" id="10_2wasf"]
+[ext_resource type="Texture2D" uid="uid://cb8exapdwr7yd" path="res://Assets/Gold Bag.png" id="11_7gvjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rn0mq"]
-size = Vector2(287.75, 868)
+size = Vector2(189.875, 504)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxt08"]
+size = Vector2(191, 502.25)
 
 [node name="Playmat" type="TextureRect"]
 offset_right = 1919.0
 offset_bottom = 1083.0
 script = ExtResource("1_q436q")
 
-[node name="EnemyBase2" type="Area2D" parent="."]
-position = Vector2(1920, 0)
+[node name="PlayerBase" type="Area2D" parent="." groups=["PlayerGroup"]]
+position = Vector2(1, 135)
+script = ExtResource("2_1b6mf")
 
-[node name="EnemyBase" type="TextureRect" parent="EnemyBase2"]
-offset_left = -336.0
-offset_bottom = 830.0
-
-[node name="EnemyBaseCollision" type="CollisionShape2D" parent="EnemyBase2"]
-position = Vector2(-182, 415.25)
-shape = SubResource("RectangleShape2D_kxt08")
-
-[node name="PlayerBase2" type="Area2D" parent="."]
-
-[node name="PlayerBaseCollision" type="CollisionShape2D" parent="PlayerBase2"]
+[node name="PlayerBaseCollision" type="CollisionShape2D" parent="PlayerBase"]
+position = Vector2(95.9375, 248)
 shape = SubResource("RectangleShape2D_rn0mq")
 
-[node name="PlayerBaseTexture" type="TextureRect" parent="PlayerBase2"]
-offset_left = 213.0
-offset_top = 59.0
-offset_right = 549.0
-offset_bottom = 889.0
+[node name="PlayerBaseTexture" type="TextureRect" parent="PlayerBase"]
+offset_right = 192.0
+offset_bottom = 500.0
+texture = ExtResource("2_so5vb")
+
+[node name="EnemyBase" type="Area2D" parent="." groups=["CpuGroup"]]
+position = Vector2(1723, 135)
+script = ExtResource("4_w216x")
+
+[node name="EnemyBase" type="TextureRect" parent="EnemyBase"]
+offset_right = 192.0
+offset_bottom = 500.0
+texture = ExtResource("2_so5vb")
+
+[node name="EnemyBaseCollision" type="CollisionShape2D" parent="EnemyBase"]
+position = Vector2(95.5, 248.125)
+shape = SubResource("RectangleShape2D_kxt08")
 
 [node name="PlayerUnitSpawner" type="Node2D" parent="."]
-position = Vector2(0, 540)
+position = Vector2(95, 380)
 script = ExtResource("3_sijm1")
 
-[node name="PlayerUnitSpawnTimer" type="Timer" parent="PlayerUnitSpawner"]
-one_shot = true
-autostart = true
-
 [node name="EnemyUnitSpawner" type="Node2D" parent="."]
-position = Vector2(1920, 540)
+position = Vector2(1817, 380)
 script = ExtResource("4_jbaix")
 
 [node name="EnemyUnitSpawnTimer" type="Timer" parent="EnemyUnitSpawner"]
 one_shot = true
 autostart = true
 
-[node name="Toolbar" parent="." instance=ExtResource("4_bxqui")]
-offset_left = -25.0
-offset_top = 799.0
-offset_right = 1813.0
-offset_bottom = 1129.0
+[node name="Toolbar" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_xm6jr")
 
-[connection signal="timeout" from="PlayerUnitSpawner/PlayerUnitSpawnTimer" to="PlayerUnitSpawner" method="_on_player_unit_spawn_timer_timeout"]
+[node name="ToolbarTexture" type="TextureRect" parent="Toolbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 777.0
+offset_right = 1881.0
+offset_bottom = 1041.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1157n")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Toolbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 784.0
+offset_right = 1879.0
+offset_bottom = 1043.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="GridContainer" type="GridContainer" parent="Toolbar/MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Healthbar" type="Control" parent="Toolbar/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Toolbar/MarginContainer/GridContainer/Healthbar"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = -44.0
+offset_right = 588.0
+offset_bottom = 142.0
+texture = ExtResource("9_qsl1r")
+
+[node name="HealthbarProgress" type="TextureProgressBar" parent="Toolbar/MarginContainer/GridContainer/Healthbar"]
+layout_mode = 1
+offset_left = 174.0
+offset_top = -10.0
+offset_right = 573.0
+offset_bottom = 105.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("10_2wasf")
+
+[node name="ResourceContainer" type="Control" parent="Toolbar/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gold Icon" type="TextureRect" parent="Toolbar/MarginContainer/GridContainer/ResourceContainer"]
+layout_mode = 2
+offset_left = 247.0
+offset_top = 9.0
+offset_right = 313.0
+offset_bottom = 75.0
+texture = ExtResource("11_7gvjy")
+expand_mode = 1
+
+[node name="Gold Label" type="RichTextLabel" parent="Toolbar/MarginContainer/GridContainer/ResourceContainer"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 35.0
+offset_right = 329.0
+offset_bottom = 59.0
+text = "0"
+
+[node name="ButtonContainer" type="GridContainer" parent="Toolbar/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+columns = 10
+
+[node name="GoldTimer" type="Timer" parent="Toolbar"]
+wait_time = 4.0
+autostart = true
+
 [connection signal="timeout" from="EnemyUnitSpawner/EnemyUnitSpawnTimer" to="EnemyUnitSpawner" method="_on_enemy_unit_spawn_timer_timeout"]
+[connection signal="timeout" from="Toolbar/GoldTimer" to="Toolbar" method="_on_gold_timer_timeout"]

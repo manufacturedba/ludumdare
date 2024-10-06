@@ -1,31 +1,31 @@
 extends Control
 
-var classes = CONSTANTS.CLASS_ENUM;
-
 var spawnButtonPreload := preload("res://Battlefield/Toolbar/UnitSpawnButton/UnitSpawnButton.tscn");
-var health := 0;
 var spawnButtons = [];
 var playerUnitTypes;
+var gold = 2;
+var income = 1;
 
 var unitDict = {
-	classes.SOLDIER: {
+	CONSTANTS.CLASS_ENUM.SOLDIER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/soldier.png",
 		"cost": 1,
-		"class": classes.SOLDIER
+		"class": CONSTANTS.CLASS_ENUM.SOLDIER
 	},
-	classes.ARCHER: {
+	CONSTANTS.CLASS_ENUM.ARCHER: {
 		"texture": "res://Battlefield/Toolbar/UnitSpawnButton/Textures/archer.png",
 		"cost": 2,
-		"class": classes.ARCHER
+		"class": CONSTANTS.CLASS_ENUM.ARCHER
 	},
 }
 
-@onready var healthbar = $Healthbar;
+@onready var healthbar = $MarginContainer/GridContainer/Healthbar/HealthbarProgress;
 @onready var buttonContainer = $MarginContainer/GridContainer/ButtonContainer;
 @onready var playerSpawner = $"../PlayerUnitSpawner";
+@onready var goldLabel = $"MarginContainer/GridContainer/ResourceContainer/Gold Label";
+@onready var goldTimer = $GoldTimer;
 
 # @onready var spawner = $Spawner;
-
 
 var buttonWidth := 100;
 var buttonOffset := 10;
@@ -37,16 +37,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#healthbar.value += -1;
 	pass;
 
-func spawn(unit: int):
+func spawn(unit: CONSTANTS.CLASS_ENUM):
+	var cost = unitDict[unit].cost;
+	if (cost > gold):
+		return;
+	gold -= cost;
 	playerSpawner.spawnUnit(unit);
+	updateGold();
 	
 func with(_playerUnitTypes: Array, _health: int):
 	playerUnitTypes = _playerUnitTypes;
-	health = _health;
-	#healthbar.health = 100;
 	var startingPosition := Vector2(0, 0);
 
 	for index in range(0, playerUnitTypes.size()):
@@ -58,13 +60,24 @@ func with(_playerUnitTypes: Array, _health: int):
 		spawnButton.position = Vector2(buttonWidth * index + buttonOffset, 0);
 		spawnButtons.push_back(spawnButton);
 		buttonContainer.add_child(spawnButton);
-		
-	return self;
-
-func update(health, resource):
 	
+	updateGold();
+	return self;
+	
+func updateLifePercent(percent: int) -> void:
+	healthbar.value = percent;
+
+func updateGold():
+	goldLabel.text = "%d" % gold;
 	for button in spawnButtons:
-		var unitType = button.unit.type;
+		var unitType = button.unit.class;
 		var cost = unitDict[unitType].cost;
-		if cost > resource:
+		if cost > gold:
 			button.disabled = true;
+		else:
+			button.disabled = false;
+
+
+func _on_gold_timer_timeout() -> void:
+	gold += income;
+	updateGold();

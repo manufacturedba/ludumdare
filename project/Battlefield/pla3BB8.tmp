@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://djjy12c52d7gf"]
+
+[ext_resource type="Script" path="res://Battlefield/playmat.gd" id="1_q436q"]
+[ext_resource type="Script" path="res://Battlefield/player_base.gd" id="2_1b6mf"]
+[ext_resource type="Texture2D" uid="uid://bcey277d67t6v" path="res://Assets/BaseWall.png" id="2_so5vb"]
+[ext_resource type="Script" path="res://Battlefield/player_unit_spawner.gd" id="3_sijm1"]
+[ext_resource type="PackedScene" uid="uid://c16qyvf1jthk" path="res://Battlefield/Toolbar/toolbar.tscn" id="4_bxqui"]
+[ext_resource type="Script" path="res://Battlefield/enemy_unit_spawner.gd" id="4_jbaix"]
+[ext_resource type="Script" path="res://Battlefield/enemy_base.gd" id="4_w216x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn0mq"]
+size = Vector2(189.875, 504)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxt08"]
+size = Vector2(191, 502.25)
+
+[node name="Playmat" type="TextureRect"]
+offset_right = 1919.0
+offset_bottom = 1083.0
+script = ExtResource("1_q436q")
+
+[node name="PlayerBase" type="Area2D" parent="." groups=["PlayerGroup"]]
+position = Vector2(1, 135)
+script = ExtResource("2_1b6mf")
+
+[node name="PlayerBaseCollision" type="CollisionShape2D" parent="PlayerBase"]
+position = Vector2(95.9375, 248)
+shape = SubResource("RectangleShape2D_rn0mq")
+
+[node name="PlayerBaseTexture" type="TextureRect" parent="PlayerBase"]
+offset_right = 192.0
+offset_bottom = 500.0
+texture = ExtResource("2_so5vb")
+
+[node name="EnemyBase" type="Area2D" parent="." groups=["CpuGroup"]]
+position = Vector2(1723, 135)
+script = ExtResource("4_w216x")
+
+[node name="EnemyBase" type="TextureRect" parent="EnemyBase"]
+offset_right = 192.0
+offset_bottom = 500.0
+texture = ExtResource("2_so5vb")
+
+[node name="EnemyBaseCollision" type="CollisionShape2D" parent="EnemyBase"]
+position = Vector2(95.5, 248.125)
+shape = SubResource("RectangleShape2D_kxt08")
+
+[node name="PlayerUnitSpawner" type="Node2D" parent="."]
+position = Vector2(95, 380)
+script = ExtResource("3_sijm1")
+
+[node name="EnemyUnitSpawner" type="Node2D" parent="."]
+position = Vector2(1817, 380)
+script = ExtResource("4_jbaix")
+
+[node name="EnemyUnitSpawnTimer" type="Timer" parent="EnemyUnitSpawner"]
+one_shot = true
+autostart = true
+
+[node name="Toolbar" parent="." instance=ExtResource("4_bxqui")]
+offset_left = 0.0
+offset_top = 777.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="timeout" from="EnemyUnitSpawner/EnemyUnitSpawnTimer" to="EnemyUnitSpawner" method="_on_enemy_unit_spawn_timer_timeout"]

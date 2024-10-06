@@ -22,5 +22,4 @@ func with(_spawner, _unit):
 	return self;
 	
 func _on_pressed() -> void:
-	print_debug("button pressed");
 	spawner.spawn(unit.class);
