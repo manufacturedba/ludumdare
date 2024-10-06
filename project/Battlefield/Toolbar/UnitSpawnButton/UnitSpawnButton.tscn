@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2fpqgcb0tmjv"]
+[gd_scene load_steps=5 format=3 uid="uid://b2fpqgcb0tmjv"]
 
 [ext_resource type="Script" path="res://Battlefield/Toolbar/UnitSpawnButton/unit_spawn_button.gd" id="1_3w72d"]
 [ext_resource type="Texture2D" uid="uid://b70og1ola2yii" path="res://Battlefield/Toolbar/UnitSpawnButton/Textures/unit-spawn-button.png" id="1_eyw56"]
 [ext_resource type="Texture2D" uid="uid://bdgk8ifwymial" path="res://Battlefield/Toolbar/UnitSpawnButton/Textures/unit-spawn-button-pressed.png" id="2_t8sja"]
+[ext_resource type="Texture2D" uid="uid://b2bn2413oh7yq" path="res://Battlefield/Toolbar/UnitSpawnButton/Textures/unit-spawn-button-disabled.png" id="3_mfccs"]
 
 [node name="UnitSpawnButton" type="TextureButton"]
 custom_minimum_size = Vector2(100, 100)
@@ -10,9 +11,15 @@ offset_right = 100.0
 offset_bottom = 100.0
 texture_normal = ExtResource("1_eyw56")
 texture_pressed = ExtResource("2_t8sja")
+texture_disabled = ExtResource("3_mfccs")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("1_3w72d")
+
+[node name="UnitSpawnButtonDisabledMask" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="UnitTypeTexture" type="TextureRect" parent="."]
 layout_mode = 1
