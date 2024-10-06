@@ -1,3 +1,4 @@
 extends Node
 
 enum CLASS_ENUM {SOLDIER, ARCHER};
+var ARROW_SPEED = 1000;

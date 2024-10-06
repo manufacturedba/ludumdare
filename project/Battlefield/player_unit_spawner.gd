@@ -1,9 +1,11 @@
 extends Node2D
 
 const plSoldier = preload("res://Units/Soldier.tscn");
+const plArcher = preload("res://Units/Archer.tscn");
 
 const unitEnumPlMap = {
-	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier
+	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier,
+	CONSTANTS.CLASS_ENUM.ARCHER: plArcher
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +20,3 @@ func spawnUnit(unitEnumVal: CONSTANTS.CLASS_ENUM):
 	var unit = unitEnumPlMap[unitEnumVal].instantiate().with(true);
 	unit.global_position = global_position;
 	get_tree().current_scene.add_child(unit);
-
-#TODO: Delete this and also the timer
-#func _on_player_unit_spawn_timer_timeout() -> void:
-	#spawnUnit(CONSTANTS.CLASS_ENUM.SOLDIER);

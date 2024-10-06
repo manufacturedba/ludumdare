@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxoh6mpqkcvkq"]
+
+[ext_resource type="Script" path="res://Units/Projectile/arrow.gd" id="1_pb8xi"]
+[ext_resource type="Texture2D" uid="uid://dmhe77ifx1bu1" path="res://Units/Projectile/Textures/arrow.png" id="2_5c75y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_226rq"]
+size = Vector2(129, 107.5)
+
+[node name="Arrow" type="Area2D"]
+script = ExtResource("1_pb8xi")
+
+[node name="ArrowCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_226rq")
+
+[node name="ArrowTexture" type="TextureRect" parent="ArrowCollision"]
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 6.0
+offset_bottom = 3.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_5c75y")
+expand_mode = 2
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

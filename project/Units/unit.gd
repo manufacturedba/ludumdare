@@ -1,9 +1,11 @@
 extends Area2D;
 
-@onready var sprite: AnimatedSprite2D = $SoldierSpriteMask/SoldierSprite;
-@onready var spriteMask:Sprite2D = $SoldierSpriteMask;
-@onready var collision: CollisionShape2D = $SoldierCollision;
-@onready var timer:Timer = $SoldierAttackTimer;
+class_name Unit
+
+@onready var sprite: AnimatedSprite2D = $UnitSpriteMask/UnitSprite;
+@onready var spriteMask:Sprite2D = $UnitSpriteMask;
+@onready var collision: CollisionShape2D = $UnitCollision;
+@onready var timer:Timer = $UnitAttackTimer;
 
 const DEFAULT_SPEED := Vector2(100,0);
 const ATTACK_INTERVAL = 1;
@@ -16,13 +18,15 @@ var normalSpeed: Vector2;
 var currentSpeed: Vector2;
 var isPlayer: bool
 var engagedHostiles: Array[Area2D] = [];
+var group;
 
 func with(_isPlayer: bool):
 	isPlayer = _isPlayer;
 	return self;
-
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	if (isPlayer):
 		sprite.modulate = Color.BLUE;
 		normalSpeed = DEFAULT_SPEED;
@@ -30,6 +34,8 @@ func _ready() -> void:
 	else:
 		sprite.modulate = Color.RED;
 		normalSpeed = -1*DEFAULT_SPEED;
+		# TODO: Mirror the unit / not turn it upside down :P
+		rotation = deg_to_rad(180);
 		add_to_group("CpuGroup");
 	currentSpeed = normalSpeed;
 	sprite.frame = randi_range(0,3);
@@ -77,7 +83,7 @@ func __checkHostile(area: Area2D) -> bool:
 		return area.is_in_group("CpuGroup");
 	else:
 		return area.is_in_group("PlayerGroup");
-
+		
 func _on_area_exited(area: Area2D) -> void:
 	engagedHostiles.erase(area)
 	if (engagedHostiles.size() == 0):
