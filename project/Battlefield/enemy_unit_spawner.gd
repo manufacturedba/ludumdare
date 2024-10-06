@@ -19,7 +19,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_enemy_unit_spawn_timer_timeout() -> void:
-	#var soldier: Area2D = plSoldier.instantiate().with(false);
-	var soldier: Area2D = plArcher.instantiate().with(false);
+	var soldier: Area2D = plSoldier.instantiate().with(false);
+	# TODO: Hook up to some enemy spawn config
+	#var archer: Area2D = plArcher.instantiate().with(false);
 	soldier.global_position = global_position;
 	get_tree().current_scene.add_child(soldier);
