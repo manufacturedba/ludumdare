@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://8yjxxpsojohg"]
+
+[ext_resource type="Script" path="res://Levels/level_3.gd" id="1_jxu6j"]
+[ext_resource type="PackedScene" uid="uid://djjy12c52d7gf" path="res://Battlefield/playmat.tscn" id="2_ssfsf"]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource("1_jxu6j")
+
+[node name="Playmat" parent="." instance=ExtResource("2_ssfsf")]

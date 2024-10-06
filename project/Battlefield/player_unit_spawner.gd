@@ -1,12 +1,6 @@
 extends Node2D
 
-const plSoldier = preload("res://Units/Soldier.tscn");
-const plArcher = preload("res://Units/Archer.tscn");
-
-const unitEnumPlMap = {
-	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier,
-	CONSTANTS.CLASS_ENUM.ARCHER: plArcher
-}
+var unitEnumPlMap;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,3 +14,7 @@ func spawnUnit(unitEnumVal: CONSTANTS.CLASS_ENUM):
 	var unit = unitEnumPlMap[unitEnumVal].instantiate().with(true);
 	unit.global_position = global_position;
 	get_tree().current_scene.add_child(unit);
+
+func with(_unitEnumPlMap):
+	unitEnumPlMap = _unitEnumPlMap;
+	return self;

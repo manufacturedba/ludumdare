@@ -7,7 +7,7 @@ class_name Unit
 @onready var collision: CollisionShape2D = $UnitCollision;
 @onready var timer:Timer = $UnitAttackTimer;
 
-const DEFAULT_SPEED := Vector2(100,0);
+var defaultSpeed: int = CONSTANTS.SOLDIER_SPEED;
 const ATTACK_INTERVAL = 1;
 const DAMAGE = 1;
 
@@ -29,11 +29,11 @@ func _with(_isPlayer: bool, _maxLife: int):
 func _ready() -> void:
 	if (isPlayer):
 		sprite.modulate = Color.BLUE;
-		normalSpeed = DEFAULT_SPEED;
+		normalSpeed = Vector2(defaultSpeed,0);
 		add_to_group("PlayerGroup");
 	else:
 		sprite.modulate = Color.RED;
-		normalSpeed = -1*DEFAULT_SPEED;
+		normalSpeed = Vector2(-1*defaultSpeed, 0);
 		add_to_group("CpuGroup");
 	currentSpeed = normalSpeed;
 	sprite.frame = randi_range(0,3);

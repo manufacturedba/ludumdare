@@ -1,18 +1,24 @@
 extends Unit
 
+class_name Archer
+
 var size = 1000;
+var range = 0;
+
 @onready var plArrow = preload("res://Units/Projectile/Arrow.tscn");
 @onready var firingRangeCollision = $FiringRange/FiringRangeCollision;
 
-## Called when the node enters the scene tree for the first time.
+var projectile;
 
 func with(_isPlayer):
+	range = CONSTANTS.ARCHER_RANGE;
 	return _with(_isPlayer, CONSTANTS.ARCHER_LIFE);
 
 func _ready() -> void:
 	super();
+	projectile = plArrow;
 	var newCollisionShape = RectangleShape2D.new();
-	newCollisionShape.size = Vector2(CONSTANTS.ARCHER_RANGE, 1);
+	newCollisionShape.size = Vector2(range, 1);
 	firingRangeCollision.shape = newCollisionShape;
 #
 func attack() -> void:
@@ -21,7 +27,7 @@ func attack() -> void:
 		create_arrow();
 
 func create_arrow() -> void:
-	var arrow = plArrow.instantiate().with(isPlayer);
+	var arrow = projectile.instantiate().with(isPlayer);
 	self.add_child(arrow);
 
 func _on_area_entered(area: Area2D) -> void:

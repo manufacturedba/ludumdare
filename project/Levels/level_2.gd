@@ -5,6 +5,7 @@ extends Node2D
 const playerUnitTypes: Array[CONSTANTS.CLASS_ENUM] = [
 	CONSTANTS.CLASS_ENUM.SOLDIER, CONSTANTS.CLASS_ENUM.ARCHER
 ];
+
 const enemyPattern: Array[CONSTANTS.CLASS_ENUM] = [CONSTANTS.CLASS_ENUM.SOLDIER];
 
 func _ready() -> void:

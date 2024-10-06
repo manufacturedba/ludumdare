@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5myo4ux0mp0w"]
+
+[ext_resource type="Script" path="res://Units/Projectile/catapult_ballistic.gd" id="1_ekw3s"]
+[ext_resource type="Texture2D" uid="uid://bojiu6wbo1ybw" path="res://Units/Projectile/Textures/catapult-ballistic.png" id="2_i44xe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_226rq"]
+size = Vector2(129, 107.5)
+
+[node name="CatapultBallistic" type="Area2D"]
+script = ExtResource("1_ekw3s")
+
+[node name="CatapultBallisticCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_226rq")
+
+[node name="CatapultBallisticTexture" type="TextureRect" parent="CatapultBallisticCollision"]
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 6.0
+offset_bottom = 3.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_i44xe")
+expand_mode = 2
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
