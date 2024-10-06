@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmxfnvkdhtaiy"]
+
+[ext_resource type="PackedScene" uid="uid://dc0soohaogl1m" path="res://Units/Unit.tscn" id="1_d2mv1"]
+[ext_resource type="Script" path="res://Units/archer.gd" id="1_vnvi1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u0nm"]
+size = Vector2(1378, 60)
+
+[node name="Archer" instance=ExtResource("1_d2mv1")]
+script = ExtResource("1_vnvi1")
+
+[node name="FiringRange" type="Area2D" parent="." index="3"]
+
+[node name="FiringRangeCollision" type="CollisionShape2D" parent="FiringRange" index="0"]
+position = Vector2(735, 14)
+shape = SubResource("RectangleShape2D_4u0nm")
+
+[connection signal="area_entered" from="FiringRange" to="." method="_on_firing_range_area_entered"]
+[connection signal="area_exited" from="FiringRange" to="." method="_on_firing_range_area_exited"]

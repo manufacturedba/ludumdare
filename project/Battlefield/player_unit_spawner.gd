@@ -1,9 +1,11 @@
 extends Node2D
 
 const plSoldier = preload("res://Units/Soldier.tscn");
+const plArcher = preload("res://Units/Archer.tscn");
 
 const unitEnumPlMap = {
-	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier
+	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier,
+	CONSTANTS.CLASS_ENUM.ARCHER: plArcher
 }
 
 # Called when the node enters the scene tree for the first time.

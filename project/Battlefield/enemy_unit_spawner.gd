@@ -1,10 +1,13 @@
 extends Node2D
 
 @onready var timer:Timer = $EnemyUnitSpawnTimer;
+
 const plSoldier = preload("res://Units/Soldier.tscn");
+const plArcher = preload("res://Units/Archer.tscn");
 
 const unitEnumPlMap = {
-	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier
+	CONSTANTS.CLASS_ENUM.SOLDIER: plSoldier,
+	CONSTANTS.CLASS_ENUM.ARCHER: plArcher
 }
 
 var pattern: Array[CONSTANTS.CLASS_ENUM] = [CONSTANTS.CLASS_ENUM.SOLDIER];

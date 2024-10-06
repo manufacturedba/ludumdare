@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dc0soohaogl1m"]
+
+[ext_resource type="Script" path="res://Units/unit.gd" id="1_jnjb0"]
+[ext_resource type="Texture2D" uid="uid://cleapuqwf8xk6" path="res://Assets/Soldiers-Sheet.png" id="2_cq05t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b07hh"]
+size = Vector2(128, 501)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8vvol"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8pec"]
+atlas = ExtResource("2_cq05t")
+region = Rect2(0, 0, 128, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmx7r"]
+atlas = ExtResource("2_cq05t")
+region = Rect2(128, 0, 128, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojpmt"]
+atlas = ExtResource("2_cq05t")
+region = Rect2(256, 0, 128, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcqm6"]
+atlas = ExtResource("2_cq05t")
+region = Rect2(384, 0, 128, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x28rp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8pec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmx7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojpmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcqm6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Unit" type="Area2D"]
+script = ExtResource("1_jnjb0")
+
+[node name="UnitCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_b07hh")
+
+[node name="UnitAttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="UnitSpriteMask" type="Sprite2D" parent="."]
+clip_children = 1
+texture = SubResource("CanvasTexture_8vvol")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 500)
+
+[node name="UnitSprite" type="AnimatedSprite2D" parent="UnitSpriteMask"]
+sprite_frames = SubResource("SpriteFrames_x28rp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

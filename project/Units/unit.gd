@@ -1,9 +1,11 @@
 extends Area2D;
 
-@onready var sprite: AnimatedSprite2D = $SoldierSpriteMask/SoldierSprite;
-@onready var spriteMask:Sprite2D = $SoldierSpriteMask;
-@onready var collision: CollisionShape2D = $SoldierCollision;
-@onready var timer:Timer = $SoldierAttackTimer;
+class_name Unit
+
+@onready var sprite: AnimatedSprite2D = $UnitSpriteMask/UnitSprite;
+@onready var spriteMask:Sprite2D = $UnitSpriteMask;
+@onready var collision: CollisionShape2D = $UnitCollision;
+@onready var timer:Timer = $UnitAttackTimer;
 
 const DEFAULT_SPEED := Vector2(100,0);
 const ATTACK_INTERVAL = 1;
