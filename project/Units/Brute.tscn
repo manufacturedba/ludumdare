@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8g6rj2udffwf"]
+
+[ext_resource type="PackedScene" uid="uid://dc0soohaogl1m" path="res://Units/Unit.tscn" id="1_gcd3g"]
+[ext_resource type="Script" path="res://brute.gd" id="2_6lhd1"]
+
+[node name="Brute" instance=ExtResource("1_gcd3g")]
+script = ExtResource("2_6lhd1")
