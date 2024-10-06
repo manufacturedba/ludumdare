@@ -161,6 +161,10 @@ autostart = true
 [node name="EnemyBaseDestructionTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="PlayerBaseDestructionTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="EnemyUnitSpawner/EnemyUnitSpawnTimer" to="EnemyUnitSpawner" method="_on_enemy_unit_spawn_timer_timeout"]
 [connection signal="timeout" from="Toolbar/GoldTimer" to="Toolbar" method="_on_gold_timer_timeout"]
 [connection signal="timeout" from="EnemyBaseDestructionTimer" to="." method="_on_enemy_base_destruction_timer_timeout"]
+[connection signal="timeout" from="PlayerBaseDestructionTimer" to="." method="_on_player_base_destruction_timer_timeout"]

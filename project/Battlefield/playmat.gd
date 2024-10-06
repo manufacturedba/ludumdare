@@ -9,3 +9,6 @@ func with(playerUnitTypes: Array[CONSTANTS.CLASS_ENUM], enemyPattern: Array[CONS
 
 func _on_enemy_base_destruction_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://Menus/Victory.tscn");
+
+func _on_player_base_destruction_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://Menus/Defeat.tscn");
