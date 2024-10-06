@@ -7,22 +7,25 @@ var range = 0;
 
 @onready var plArrow = preload("res://Units/Projectile/Arrow.tscn");
 @onready var firingRangeCollision = $FiringRange/FiringRangeCollision;
+@onready var firingRange = $FiringRange;
 
 var projectile;
 @onready var root_node = get_node("/root");
 
 func with(_isPlayer):
 	defaultSpeed = CONSTANTS.ARCHER_SPEED;
-	range = CONSTANTS.ARCHER_RANGE;
 	return _with(_isPlayer, CONSTANTS.ARCHER_LIFE);
 
 func _ready() -> void:
 	super();
+	attackInterval = CONSTANTS.ARCHER_FIRING_SPEED;
 	projectile = plArrow;
+	var range = CONSTANTS.ARCHER_RANGE;
 	var newCollisionShape = RectangleShape2D.new();
 	newCollisionShape.size = Vector2(range, 1);
 	firingRangeCollision.shape = newCollisionShape;
-	
+	firingRangeCollision.position.x = range;
+
 func get_nearest_hostile() -> Area2D:
 	var nearestHostile;
 	var smallest;

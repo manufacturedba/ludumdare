@@ -4,24 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://dmhe77ifx1bu1" path="res://Units/Projectile/Textures/arrow.png" id="2_5c75y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_226rq"]
-size = Vector2(129, 107.5)
+size = Vector2(19.125, 18.6875)
 
 [node name="Arrow" type="Area2D"]
 script = ExtResource("1_pb8xi")
 
 [node name="ArrowCollision" type="CollisionShape2D" parent="."]
+position = Vector2(9.4375, 9.65625)
 shape = SubResource("RectangleShape2D_226rq")
 
-[node name="ArrowTexture" type="TextureRect" parent="ArrowCollision"]
-offset_left = 6.0
-offset_top = 3.0
-offset_right = 6.0
-offset_bottom = 3.0
+[node name="ArrowTexture" type="TextureRect" parent="."]
+offset_right = 96.0
+offset_bottom = 96.0
+scale = Vector2(0.2, 0.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_5c75y")
-expand_mode = 2
-stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
