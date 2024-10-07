@@ -60,7 +60,7 @@ position = Vector2(770, 7)
 shape = SubResource("RectangleShape2D_4u0nm")
 
 [node name="ArcherSprite" type="AnimatedSprite2D" parent="." index="4"]
-position = Vector2(-366, -869)
+position = Vector2(-2871, -2387)
 scale = Vector2(0.56224, 0.56224)
 sprite_frames = SubResource("SpriteFrames_el7mq")
 

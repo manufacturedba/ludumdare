@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b100m8garqq62"]
+[gd_scene load_steps=3 format=3 uid="uid://b100m8garqq62"]
 
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_fd8qa"]
+[ext_resource type="AudioStream" uid="uid://bx15k84njcktk" path="res://Assets/Audio/select.wav" id="2_1el72"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -49,9 +50,17 @@ text = "Level 5"
 layout_mode = 2
 text = "Exit"
 
+[node name="MenuSelectAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1el72")
+
+[node name="LevelSelectTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Level2" to="." method="_on_level_2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Level3" to="." method="_on_level_3_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Level4" to="." method="_on_level_4_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Level5" to="." method="_on_level_5_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="timeout" from="LevelSelectTimer" to="." method="_on_level_select_timer_timeout"]
