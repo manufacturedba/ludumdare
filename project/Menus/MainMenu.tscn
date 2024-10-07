@@ -27,18 +27,22 @@ text = "Level 1"
 
 [node name="Level2" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Level 2"
 
 [node name="Level3" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Level 3"
 
 [node name="Level4" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Level 4"
 
 [node name="Level5" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Level 5"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
