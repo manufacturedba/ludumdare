@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dc0soohaogl1m"]
+[gd_scene load_steps=11 format=3 uid="uid://dc0soohaogl1m"]
 
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_jnjb0"]
 [ext_resource type="Texture2D" uid="uid://cleapuqwf8xk6" path="res://Assets/Soldiers-Sheet.png" id="2_cq05t"]
+[ext_resource type="AudioStream" uid="uid://dgspho1c8yjev" path="res://Assets/Audio/creature-spawn.wav" id="3_788lu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b07hh"]
 size = Vector2(128, 501)
@@ -62,6 +63,10 @@ region_rect = Rect2(0, 0, 128, 500)
 
 [node name="UnitSprite" type="AnimatedSprite2D" parent="UnitSpriteMask"]
 sprite_frames = SubResource("SpriteFrames_x28rp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_788lu")
+volume_db = -5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

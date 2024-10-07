@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://daihsnu0wbt6t"]
+[gd_scene load_steps=30 format=3 uid="uid://daihsnu0wbt6t"]
 
 [ext_resource type="Script" path="res://Units/Projectile/arrow.gd" id="1_pb8xi"]
 [ext_resource type="Texture2D" uid="uid://tyr0bpyif1po" path="res://Assets/volley-sprite-sheet.png" id="2_07imb"]
 [ext_resource type="Texture2D" uid="uid://6ga618ir25q3" path="res://Assets/volley-collision-sprite-sheet.png" id="3_wj2v3"]
+[ext_resource type="AudioStream" uid="uid://wx2kgtsdfxwu" path="res://Assets/Audio/arrow.wav" id="4_24257"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_226rq"]
 size = Vector2(19.125, 18.6875)
@@ -197,6 +198,12 @@ position = Vector2(33, -22)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_gqq8g")
 autoplay = "default"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ArrowCollision/ArrowAnimatedSprite2DBirth"]
+position = Vector2(-84.875, 24.6875)
+scale = Vector2(2, 2)
+stream = ExtResource("4_24257")
+autoplay = true
 
 [node name="ArrowDeathArea2D" type="Area2D" parent="."]
 

@@ -6,6 +6,7 @@ class_name Unit
 @onready var spriteMask:Sprite2D = $UnitSpriteMask;
 @onready var collision: CollisionShape2D = $UnitCollision;
 @onready var timer:Timer = $UnitAttackTimer;
+@onready var audioStreamPlayer2D = $AudioStreamPlayer2D;
 
 const ATTACK_INTERVAL = 1;
 
@@ -39,6 +40,7 @@ func _with(
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (isPlayer):
+		audioStreamPlayer2D.play();
 		sprite.modulate = Color.BLUE;
 		normalSpeed = Vector2(defaultSpeed,0);
 		add_to_group("PlayerGroup");
