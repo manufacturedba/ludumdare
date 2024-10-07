@@ -76,25 +76,25 @@ func _on_area_entered(area: Area2D) -> void:
 		return;
 		
 	engagedHostiles.append(area);
-	currentSpeed = Vector2(0, 0);
+	halt();
 
 func _on_area_exited(area: Area2D) -> void:
 	engagedHostiles.erase(area)
 	
 	# Delay movement until ranged enemies are also defeated
 	if (rangedHostiles.size() == 0 && engagedHostiles.size() == 0):
-		currentSpeed = normalSpeed
+		move();
 	
 func _on_firing_range_area_entered(area: Area2D) -> void:
 	if (!__checkHostile(area)):
 		return;
 		
 	rangedHostiles.append(area);
-	currentSpeed = Vector2(0, 0);
+	halt();
 
 func _on_firing_range_area_exited(area: Area2D) -> void:
 	rangedHostiles.erase(area)
 	
 	# Continue engaging melee enemies after ranged enemies die
 	if (engagedHostiles.size() == 0 && rangedHostiles.size() == 0):
-		currentSpeed = normalSpeed
+		move();

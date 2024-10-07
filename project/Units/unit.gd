@@ -20,7 +20,8 @@ var normalSpeed: Vector2;
 var currentSpeed: Vector2;
 var isPlayer: bool
 var engagedHostiles: Array[Area2D] = [];
-
+var moving := false;
+	
 func _with(
 	_isPlayer: bool, 
 	_maxLife: int = CONSTANTS.SOLDIER_LIFE, 
@@ -36,6 +37,22 @@ func _with(
 	
 	return self;
 
+func move() -> void:
+	# Avoid resetting once we're in motion
+	if (!moving):
+		currentSpeed = Vector2(normalSpeed.x*.1, normalSpeed.y);
+		moving = true;
+
+func halt() -> void:
+	currentSpeed = Vector2(0, 0);
+	moving = false;
+
+func accelerate() -> void:
+	# Part of process loop so no-op when already moving
+	if (moving):
+		if (abs(normalSpeed.x) > abs(currentSpeed.x)):
+			currentSpeed = Vector2(currentSpeed.x*1.1, normalSpeed.y);
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (isPlayer):
@@ -44,10 +61,10 @@ func _ready() -> void:
 		add_to_group("PlayerGroup");
 	else:
 		sprite.modulate = Color.RED;
-		normalSpeed = Vector2(-1*defaultSpeed, 0);
+		normalSpeed = Vector2(-1*defaultSpeed,0);
 		rotation = deg_to_rad(180);
 		add_to_group("CpuGroup");
-	currentSpeed = normalSpeed;
+	move();
 	sprite.frame = randi_range(0,3);
 	sprite.play();
 	set_clip_children_mode(CanvasItem.CLIP_CHILDREN_ONLY);
@@ -78,14 +95,15 @@ func __updateWidth() -> void:
 	collision.shape = newCollisionShape;
 
 func _physics_process(delta: float) -> void:
-	position += currentSpeed * delta
+	accelerate();
+	position += currentSpeed * delta;
 
 func _on_area_entered(area: Area2D) -> void:
 	if (!__checkHostile(area)):
 		return;
 		
 	engagedHostiles.append(area);
-	currentSpeed = Vector2(0, 0);
+	halt();
 	
 func __checkHostile(area: Area2D) -> bool:
 	if (area.is_in_group("ProjectileGroup")):
@@ -100,4 +118,4 @@ func __checkHostile(area: Area2D) -> bool:
 func _on_area_exited(area: Area2D) -> void:
 	engagedHostiles.erase(area)
 	if (engagedHostiles.size() == 0):
-		currentSpeed = normalSpeed
+		move();
