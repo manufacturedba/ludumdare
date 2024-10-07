@@ -16,11 +16,11 @@ func _ready() -> void:
 	super();
 	attackInterval = CONSTANTS.CATAPULT_FIRING_SPEED;
 	projectile = plCatapultBallistic;
-	range = CONSTANTS.CATAPULT_RANGE;
+	var rangeDist = CONSTANTS.CATAPULT_RANGE;
 	var newCollisionShape = RectangleShape2D.new();
-	newCollisionShape.size = Vector2(range, 1);
+	newCollisionShape.size = Vector2(rangeDist, 1);
 	firingRangeCollision.shape = newCollisionShape;
-	firingRangeCollision.position.x = range;
+	firingRangeCollision.position.x = rangeDist;
 	firingRange.position = Vector2(firingRange.position.x + CONSTANTS.CATAPULT_MINIMUM_RANGE, firingRange.position.y);
 	
 # engage hostiles in the firing zone after figuring out who is closest
@@ -29,7 +29,7 @@ func attack() -> void:
 
 func create_arrow() -> void:
 	var nearestHostile;
-	var smallest;
+	var smallest = null;;
 	for hostile in rangedHostiles:
 		var difference = abs(global_position.x - hostile.global_position.x);
 		if !smallest or difference > smallest:

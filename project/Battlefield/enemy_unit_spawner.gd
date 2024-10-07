@@ -11,14 +11,6 @@ func with(_pattern: Array[CONSTANTS.CLASS_ENUM], _unitEnumPlMap):
 	unitEnumPlMap = _unitEnumPlMap;
 	return self;
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _on_enemy_unit_spawn_timer_timeout() -> void:
 	patternIdx = (patternIdx+1) % pattern.size();
 	var unitEnumVal = pattern[patternIdx];

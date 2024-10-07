@@ -53,7 +53,7 @@ func _ready() -> void:
 	set_clip_children_mode(CanvasItem.CLIP_CHILDREN_ONLY);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (timer.is_stopped() && engagedHostiles.size() > 0):
 		attack();
 		timer.start(attackInterval);
@@ -71,7 +71,7 @@ func damage(hp: int):
 		
 func __updateWidth() -> void:
 	var totalWidth = sprite.sprite_frames.get_frame_texture('default', 0).get_width();
-	var newWidth = totalWidth * life / maxLife;
+	var newWidth = max(totalWidth * life / maxLife, 0);
 	spriteMask.region_rect = Rect2(spriteMask.region_rect.position, Vector2(newWidth, spriteMask.region_rect.size.y));
 	var newCollisionShape = RectangleShape2D.new();
 	newCollisionShape.size = spriteMask.region_rect.size;

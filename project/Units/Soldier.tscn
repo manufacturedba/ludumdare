@@ -57,5 +57,5 @@ animations = [{
 [node name="Soldier" instance=ExtResource("1_7uibd")]
 script = ExtResource("1_74qcv")
 
-[node name="SoldierSprite" type="AnimatedSprite2D" parent="." index="3"]
+[node name="SoldierSprite" type="AnimatedSprite2D" parent="UnitSpriteMask" index="1"]
 sprite_frames = SubResource("SpriteFrames_2p0sj")

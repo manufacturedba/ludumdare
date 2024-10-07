@@ -3,7 +3,7 @@ extends Control
 var spawnButtonPreload := preload("res://Battlefield/Toolbar/UnitSpawnButton/UnitSpawnButton.tscn");
 var spawnButtons = [];
 var playerUnitTypes;
-var gold = 10;
+var gold = 2;
 var income = 1;
 
 const MAX_GOLD = 99;
@@ -53,7 +53,7 @@ func _ready() -> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass;
 
 func spawn(unit: CONSTANTS.CLASS_ENUM):
@@ -66,7 +66,6 @@ func spawn(unit: CONSTANTS.CLASS_ENUM):
 	
 func with(_playerUnitTypes: Array[CONSTANTS.CLASS_ENUM]):
 	playerUnitTypes = _playerUnitTypes;
-	var startingPosition := Vector2(0, 0);
 
 	for index in range(0, playerUnitTypes.size()):
 		var type = playerUnitTypes[index]; # put real type in

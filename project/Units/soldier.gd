@@ -1,6 +1,6 @@
 extends Unit
 
-@onready var soldierSprite = $SoldierSprite;
+@onready var soldierSprite = $UnitSpriteMask/SoldierSprite;
 
 func with(_isPlayer):
 	defaultSpeed = CONSTANTS.SOLDIER_SPEED;
