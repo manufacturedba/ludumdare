@@ -10,6 +10,10 @@ var direction = 1;
 var normalSpeed = Vector2(0, 0);
 var destination: int;
 
+@onready var arrowCollisionAnimatedSprite2D = $ArrowCollision/ArrowAnimatedSprite2D;
+@onready var arrowCollisionAnimatedSprite2DDeath = $ArrowCollision/ArrowAnimatedSprite2DDeath;
+@onready var arrowCollisionAnimatedSprite2DBirth = $ArrowCollision/ArrowAnimatedSprite2DBirth;
+
 func with(_isPlayer: bool):
 	isPlayer = _isPlayer;
 	return self;
@@ -26,6 +30,9 @@ func __checkHostile(area: Area2D) -> bool:
 		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Fly somewhere along the archer
+	var positionNoise = randi_range(-50,50);
+	position.y = position.y + positionNoise;
 	add_to_group("ProjectileGroup");
 	
 	if (isPlayer):
@@ -51,3 +58,18 @@ func _on_area_entered(area: Area2D) -> void:
 	if (area.damage):
 		area.damage(damage);
 	queue_free();
+
+# Arrows vanishing
+func _on_arrow_death_area_2d_area_entered(area: Area2D) -> void:
+	if (!__checkHostile(area)):
+		return;
+		
+	arrowCollisionAnimatedSprite2DDeath.visible = true;
+	arrowCollisionAnimatedSprite2D.visible = false;
+	arrowCollisionAnimatedSprite2DDeath.play();
+
+# Arrows spawning
+func _on_arrow_animated_sprite_2d_birth_animation_finished() -> void:
+	arrowCollisionAnimatedSprite2D.visible = true;
+	arrowCollisionAnimatedSprite2DBirth.visible = false;
+	arrowCollisionAnimatedSprite2D.play();

@@ -3,6 +3,7 @@ extends Unit
 class_name Archer
 
 var size = 1000;
+var range = 0;
 
 @onready var plArrow = preload("res://Units/Projectile/Arrow.tscn");
 @onready var firingRangeCollision = $FiringRange/FiringRangeCollision;
@@ -35,16 +36,16 @@ func _ready() -> void:
 	super();
 	attackInterval = CONSTANTS.ARCHER_FIRING_SPEED;
 	projectile = plArrow;
-	var rangeDist = CONSTANTS.ARCHER_RANGE;
+	var range = CONSTANTS.ARCHER_RANGE;
 	var newCollisionShape = RectangleShape2D.new();
-	newCollisionShape.size = Vector2(rangeDist, 1);
+	newCollisionShape.size = Vector2(range, 1);
 	firingRangeCollision.shape = newCollisionShape;
-	firingRangeCollision.position.x = rangeDist;
+	firingRangeCollision.position.x = range;
 	update_sprite();
 	
 func get_nearest_hostile() -> Area2D:
 	var nearestHostile;
-	var smallest = null;
+	var smallest;
 	for hostile in rangedHostiles:
 		var difference = abs(global_position.x - hostile.global_position.x);
 		if !smallest or difference > smallest:
